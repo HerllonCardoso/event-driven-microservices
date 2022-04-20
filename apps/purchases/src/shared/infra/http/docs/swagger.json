@@ -1,0 +1,218 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Validacao RF API",
+      "description": "API para validacao de documentos na Receita Federal",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/cpf/{cpf}": {
+        "get": {
+          "tags": ["CPF"],
+          "summary": "Valida um CPF",
+          "description": "Valida um CPF",
+          "parameters": [
+            {
+              "name": "cpf",
+              "in": "path",
+              "required": true,
+              "description": "CPF válido",
+              "schema": {
+                "type": "string",
+                "example": "01234567890"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/definitions/cpf"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "CPF inválido"
+            }
+          }
+        }
+      },
+      "/cnpj/{cnpj}": {
+        "get": {
+          "tags": ["CNPJ"],
+          "summary": "Valida um CNPJ",
+          "description": "Valida um CNPJ",
+          "parameters": [
+            {
+              "name": "cnpj",
+              "in": "path",
+              "required": true,
+              "description": "CNPJ válido",
+              "schema": {
+                "type": "string",
+                "example": "15992241000131"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/definitions/cpnj"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "CNPJ inválido"
+            }
+          }
+        }
+      },
+      "/ong/{cnpj}": {
+        "get": {
+          "tags": ["CNPJ"],
+          "summary": "Valida se um CNPJ é uma ONG",
+          "description": "Valida um CNPJ sem fins lucrativos",
+          "parameters": [
+            {
+              "name": "cnpj",
+              "in": "path",
+              "required": true,
+              "description": "CNPJ válido",
+              "schema": {
+                "type": "string",
+                "example": "15992241000131"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/definitions/ongcpnj"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "CPF inválido"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "AppError": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "error"
+          },
+          "message": {
+            "type": "string",
+            "example": "Não foi possível processar sua requisição."
+          }
+        }
+      },
+      "ongcpnj": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "registro": {
+            "type": "string",
+            "example": "75.458.305/0001-40"
+          },
+          "nome": {
+            "type": "string",
+            "example": "TOKEN TEST LTDA"
+          },
+          "ong": {
+            "type": "boolean",
+            "example": false
+          },
+          "data_hora_criacao": {
+            "type": "datetime",
+            "example": "2021-11-26T03:48:09.277Z"
+          },
+          "data_hora_ultima_alteracao": {
+            "type": "datetime",
+            "example": "2021-11-26T03:48:09.277Z"
+          }
+        }
+      },
+      "cpnj": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "registro": {
+            "type": "string",
+            "example": "75.458.305/0001-40"
+          },
+          "nome": {
+            "type": "string",
+            "example": "TOKEN TEST LTDA"
+          },
+          "tipo": {
+            "type": "string",
+            "example": "CNPJ"
+          },
+          "data_hora_criacao": {
+            "type": "datetime",
+            "example": "2021-11-26T03:48:09.277Z"
+          },
+          "data_hora_ultima_alteracao": {
+            "type": "datetime",
+            "example": "2021-11-26T03:48:09.277Z"
+          }
+        }
+      },
+      "cpf": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "registro": {
+            "type": "string",
+            "example": "75.458.305/0001-40"
+          },
+          "nome": {
+            "type": "string",
+            "example": "TOKEN TEST LTDA"
+          },
+          "tipo": {
+            "type": "string",
+            "example": "CNPJ"
+          },
+          "data_hora_criacao": {
+            "type": "datetime",
+            "example": "2021-11-26T03:48:09.277Z"
+          },
+          "data_hora_ultima_alteracao": {
+            "type": "datetime",
+            "example": "2021-11-26T03:48:09.277Z"
+          }
+        }
+      }
+    }
+  }
+  
